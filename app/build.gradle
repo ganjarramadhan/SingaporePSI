@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+  compileSdkVersion 26
+  buildToolsVersion "26.0.1"
+  defaultConfig {
+    applicationId "com.ganjarramadhan.singaporepsi"
+    minSdkVersion 15
+    targetSdkVersion 26
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    jackOptions {
+      enabled false
+    }
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+  configurations.all {
+    resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
+  }
+}
+
+dependencies {
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+
+  compile 'com.android.support:appcompat-v7:26.+'
+  compile 'com.google.android.gms:play-services-maps:11.0.4'
+
+  // retrofit
+  compile 'com.squareup.retrofit2:retrofit:2.3.0'
+  compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+  compile 'com.squareup.okhttp3:okhttp:3.8.1'
+  compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+
+  // rx
+  compile 'io.reactivex.rxjava2:rxjava:2.1.4'
+  compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+  // dagger
+  compile 'com.google.dagger:dagger-android:2.11'
+  compile 'com.google.dagger:dagger-android-support:2.11'
+  annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+
+  // logging timber
+  compile 'com.jakewharton.timber:timber:4.5.1'
+
+  testCompile 'junit:junit:4.12'
+  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  })
+}
